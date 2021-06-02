@@ -1,4 +1,4 @@
-package co.pets.auth.config.init;
+package co.pets.auth.core.init;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;

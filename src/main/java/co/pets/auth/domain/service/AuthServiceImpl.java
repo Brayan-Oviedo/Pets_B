@@ -10,7 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import co.pets.auth.config.exceptions.AuthException;
+import co.pets.auth.core.exceptions.AuthException;
 import co.pets.auth.domain.jwt.JwtProvider;
 import co.pets.auth.domain.model.rol.Role;
 import co.pets.auth.domain.model.user.User;
@@ -20,7 +20,7 @@ import co.pets.auth.domain.ports.primary.UserService;
 import co.pets.auth.infrastructure.in_ports.api.model.JwtDto;
 import co.pets.auth.infrastructure.in_ports.api.model.LoginUser;
 import co.pets.auth.infrastructure.in_ports.api.model.NewUser;
-import co.pets.config.exceptions.Messages;
+import co.pets.core.exceptions.Messages;
 
 
 @Service

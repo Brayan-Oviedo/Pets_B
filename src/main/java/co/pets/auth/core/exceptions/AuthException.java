@@ -1,4 +1,4 @@
-package co.pets.auth.config.exceptions;
+package co.pets.auth.core.exceptions;
 
 
 public class AuthException extends Exception {

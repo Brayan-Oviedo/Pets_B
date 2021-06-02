@@ -7,11 +7,11 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import co.pets.auth.config.exceptions.UserException;
+import co.pets.auth.core.exceptions.UserException;
 import co.pets.auth.domain.model.user.User;
 import co.pets.auth.domain.ports.secundary.UserRepository;
 import co.pets.auth.infrastructure.out_ports.repository.UserRepositoryDB;
-import co.pets.config.exceptions.Messages;
+import co.pets.core.exceptions.Messages;
 
 
 @Service

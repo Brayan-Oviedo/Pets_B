@@ -1,4 +1,4 @@
-package co.pets.config.exceptions;
+package co.pets.core.exceptions;
 
 public class Messages {
 

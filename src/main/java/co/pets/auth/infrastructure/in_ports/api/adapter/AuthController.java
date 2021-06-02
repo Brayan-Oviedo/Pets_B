@@ -17,7 +17,7 @@ import co.pets.auth.domain.ports.primary.AuthService;
 import co.pets.auth.infrastructure.in_ports.api.model.JwtDto;
 import co.pets.auth.infrastructure.in_ports.api.model.LoginUser;
 import co.pets.auth.infrastructure.in_ports.api.model.NewUser;
-import co.pets.config.exceptions.ResException;
+import co.pets.core.exceptions.ResException;
 import co.pets.domain.exceptions.config.BadRequestException;
 
 

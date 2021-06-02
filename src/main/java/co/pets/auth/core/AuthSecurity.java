@@ -1,4 +1,4 @@
-package co.pets.auth.config;
+package co.pets.auth.core;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
