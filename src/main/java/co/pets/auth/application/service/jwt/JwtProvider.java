@@ -20,8 +20,6 @@ import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.SignatureException;
-import io.jsonwebtoken.UnsupportedJwtException;
 
 @Component
 public class JwtProvider {
@@ -55,7 +53,7 @@ public class JwtProvider {
 				.setSubject(userName)
 				.claim("rols", rols)
 				.setIssuedAt(new Date())
-                .setExpiration(new Date(new Date().getTime() + expiration))
+				.setExpiration(new Date(new Date().getTime() + expiration))
                 .signWith(SignatureAlgorithm.HS512, secret.getBytes())
                 .compact(); 
 	}
@@ -68,16 +66,12 @@ public class JwtProvider {
 		try {
 			Jwts.parser().setSigningKey(secret.getBytes()).parseClaimsJws(token);
 			return true;
-		}catch(MalformedJwtException e) {
+		}catch (Exception e) {
+			if(e instanceof MalformedJwtException) {
+				
+			}else if( e instanceof ExpiredJwtException) {
 			
-		}catch (UnsupportedJwtException e) {
-			
-		}catch (ExpiredJwtException e) {
-
-		}catch (IllegalArgumentException e) {
-			
-		}catch (SignatureException e) {
-			
+			}else { }
 		}
 		return false;
 	}

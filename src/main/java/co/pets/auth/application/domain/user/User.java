@@ -19,15 +19,15 @@ public class User extends BUser{
 	}
 	
 
-	public User(String userName, String password,  String name, String lastName, int age) {
+	public User( String userName, String password,  String name, String lastName, int age) {
 		super(userName, password);
 		this.name = name;
 		this.lastName = lastName;
 		this.age = age;
 	}
 
-	public User(String name, String lastName, int age, Set<Rol> rols) {
-		super();
+	public User(String userName, String password, String name, String lastName, int age, Set<Rol> rols) {
+		super(userName, password);
 		this.name = name;
 		this.lastName = lastName;
 		this.age = age;

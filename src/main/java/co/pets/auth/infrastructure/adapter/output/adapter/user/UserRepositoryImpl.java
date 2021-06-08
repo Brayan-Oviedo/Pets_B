@@ -2,10 +2,13 @@ package co.pets.auth.infrastructure.adapter.output.adapter.user;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 
 import co.pets.application.domain.exceptions.Messages;
 import co.pets.auth.application.domain.exception.UserException;
@@ -27,7 +30,7 @@ public class UserRepositoryImpl implements UserRepository {
 	private UserMapper mapper;
 
 	@Override
-	public User findById(Long id) throws Exception {
+	public User findById(Long id) {
 	
 		Optional<User> user = repo.findById(id).map(userEntity -> mapper.toDomain(userEntity));
 		return user.orElse(null);
@@ -36,7 +39,7 @@ public class UserRepositoryImpl implements UserRepository {
 	@Override
 	public void save(User user) throws Exception {
 		
-		if(!existsByUserName(user.getUserName())) {
+		if(!repo.existsByUserName(user.getUserName())) {
 			repo.save(mapper.toEntity(user));
 		}else throw new UserException(Messages.MESSAGE_USER_EXISTING);
 	}
@@ -55,16 +58,16 @@ public class UserRepositoryImpl implements UserRepository {
 		repo.deleteById(id);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<User> getAll() {
-		List<User> list = (List<User>) repo.findAll().stream().map(userEntity -> mapper.toDomain(userEntity));
-		return list;
+		Stream<User> stream = repo.findAll().stream().map(mapper::toDomain);
+		List<User> users = stream.collect(Collectors.toList());
+		return users;
 	}
 
 	@Override
 	public User findByUserName(String userName) {
-		Optional<User> user = repo.findByUserName(userName).map(userEntity -> mapper.toDomain(userEntity));
+		Optional<User> user = repo.findByUserName(userName).map(mapper::toDomain);
 		return user.orElse(null);
 	}
 

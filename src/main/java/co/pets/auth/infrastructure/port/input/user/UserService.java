@@ -8,4 +8,5 @@ public interface UserService extends CRUD<User, Long> {
 	User getByUserName(String userName);
 	boolean existsByUserName(String userName);
 	void save(User user) throws Exception;
+	void deleteByUserName(String userName);
 }

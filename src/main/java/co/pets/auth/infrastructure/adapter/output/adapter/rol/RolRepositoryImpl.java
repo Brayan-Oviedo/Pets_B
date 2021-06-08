@@ -2,7 +2,8 @@ package co.pets.auth.infrastructure.adapter.output.adapter.rol;
 
 import java.util.List;
 import java.util.Optional;
-
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,13 +36,13 @@ public class RolRepositoryImpl implements RolRepository {
 	@Override
 	public void save(Rol rol) {
 		
-		if(findByRole(rol.getRole()) != null) repo.save(mapper.toEntity(rol));
+		if(repo.findByRole(rol.getRole()) == null) repo.save(mapper.toEntity(rol));
 	}
 
 	@Override
-	public void update(Rol rol) throws Exception {
+	public void update(Rol rol) {
 
-		if(findByRole(rol.getRole()) == null) repo.save(mapper.toEntity(rol));
+		if(repo.findByRole(rol.getRole()) != null) repo.save(mapper.toEntity(rol));
 	}
 
 	@Override
@@ -50,12 +51,11 @@ public class RolRepositoryImpl implements RolRepository {
 		repo.deleteById(id);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Rol> getAll() {
-
-		List<Rol> list = (List<Rol>) repo.findAll().stream().map(rolEntity -> mapper.toDomain(rolEntity));
-		return list;
+		Stream<Rol> stream = repo.findAll().stream().map(mapper::toDomain);
+		List<Rol> rols = stream.collect(Collectors.toList());
+		return rols;
 	}
 
 	@Override
