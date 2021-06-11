@@ -1,5 +1,6 @@
 package co.pets.auth.application.service.jwt;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -91,29 +92,29 @@ public class JwtProviderTest {
 	}
 	
 	@Test
-	public void testValidateTokenWithMalformedJwtException() throws ParseException {
+	public void testValidateTokenWithMalformedJwtException() {
 
 		Exception exception = null;
 		try {
 			 provider.validateToken(t + ".fan");
-		} catch (Exception e) {
+		} catch (MalformedJwtException e) {
 			exception = e;
 		}
 		
-		assertTrue(exception instanceof MalformedJwtException);
+		assertThat(exception instanceof MalformedJwtException);
 	}
 	
 	@Test
-	public void testValidateTokenWithExpiredJwtException() throws ParseException {
+	public void testValidateTokenWithExpiredJwtException() {
 
 		Exception exception = null;
 		try {
 			 provider.validateToken(t);
-		} catch (Exception e) {
+		} catch (ExpiredJwtException e) {
 			exception = e;
 		}
 		
-		assertTrue(exception instanceof ExpiredJwtException);
+		assertThat(exception instanceof ExpiredJwtException);
 	}
 	
 }

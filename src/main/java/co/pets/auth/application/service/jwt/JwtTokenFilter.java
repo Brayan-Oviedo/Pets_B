@@ -49,4 +49,8 @@ public class JwtTokenFilter extends OncePerRequestFilter{
 			return header.replace("Bearer ", "");
 		}else return null;
 	}
+	
+	public String doGetToken(HttpServletRequest request) {
+		return getToken(request);
+	}
 }

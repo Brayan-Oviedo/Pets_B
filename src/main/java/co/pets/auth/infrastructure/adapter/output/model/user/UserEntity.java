@@ -84,8 +84,11 @@ public class UserEntity extends PersonEntity {
 	public void setRols(Set<RolEntity> rols) {
 		this.rols = rols;
 	}
-	
-	
-	
+
+	@Override
+	public String toString() {
+		return "UserEntity [userName=" + userName + ", password=" + password + ", rols=" + rols + "]";
+	}
+
 
 }

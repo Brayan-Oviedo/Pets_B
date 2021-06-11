@@ -59,7 +59,11 @@ public class JwtProvider {
 	}
 	
 	public String getUserNameFromToken(String token) {
-		return Jwts.parser().setSigningKey(secret.getBytes()).parseClaimsJwt(token).getBody().getSubject();
+		return Jwts
+				.parser()
+				.setSigningKey(secret.getBytes())
+				.parseClaimsJws(token).getBody()
+				.getSubject();
 	}
 	
 	public boolean validateToken(String token) {
