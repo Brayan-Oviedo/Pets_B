@@ -2,6 +2,8 @@ package co.pets.auth.application.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -55,7 +57,7 @@ public class AuthServiceImpl implements AuthService {
 	}
 
 	@Override
-	public JwtDto login(BUser loginUser) throws Exception {
+	public JwtDto login(BUser loginUser) throws AuthException {
 		
 		try {
 			UsernamePasswordAuthenticationToken user = new UsernamePasswordAuthenticationToken(loginUser.getUserName(), loginUser.getPassword());
@@ -65,8 +67,11 @@ public class AuthServiceImpl implements AuthService {
 			String jwt = jwtProvider.generateToken(authentication);
 			JwtDto jwtDto = new JwtDto(jwt);
 			return jwtDto;
-		} catch (Exception e) {
-			throw new AuthException(Messages.MESSAGE_LOGIN_FAILED);
+			
+		} catch (InternalAuthenticationServiceException e) {
+			throw new AuthException(Messages.MESSAGE_USER_NO_EXISTING);
+		} catch (BadCredentialsException e) {
+			throw new AuthException(Messages.MESSAGE_PASSWORD_WRONG);
 		}
 		
 	}
@@ -74,13 +79,9 @@ public class AuthServiceImpl implements AuthService {
 	@Override
 	public JwtDto refreshToken(JwtDto jwtDto) throws Exception {
 		
-		try {
-			String token = jwtProvider.refreshToken(jwtDto);
-			JwtDto newJwtDto = new JwtDto(token);
-			return newJwtDto;
-		} catch (Exception e) {
-			throw new AuthException(Messages.MESSAGE_REFRESH_TOKEN_FAILED);
-		}
+		String token = jwtProvider.refreshToken(jwtDto);
+		JwtDto newJwtDto = new JwtDto(token);
+		return newJwtDto;
 		
 	}	
 	

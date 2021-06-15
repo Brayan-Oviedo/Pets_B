@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.HashSet;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -13,6 +15,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import co.pets.auth.application.domain.rol.Rol;
 import co.pets.auth.application.domain.user.User;
 import co.pets.auth.infrastructure.port.input.user.UserService;
 
@@ -31,8 +34,7 @@ public class UserDetailsServiceImplTest {
 	public void init() {
 		MockitoAnnotations.openMocks(this);
 		
-		u = new User();
-		u.setUserName("Fan");
+		u = new User("Fan", "123", "", "", 19, new HashSet<Rol>());
 		
 	}
 	

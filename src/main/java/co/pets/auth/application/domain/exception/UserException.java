@@ -13,8 +13,4 @@ public class UserException extends Exception{
 		super(mssg);
 	}
 	
-	public UserException(String detail, String mssg) {
-		super(detail + ", " + mssg);
-	}
-	
 }

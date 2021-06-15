@@ -8,6 +8,7 @@ class PetsApplicationTests {
 
 	@Test
 	void contextLoads() {
+		PetsApplication.main(new String[] {});
 	}
 
 }

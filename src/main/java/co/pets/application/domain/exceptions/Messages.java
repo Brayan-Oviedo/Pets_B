@@ -15,6 +15,7 @@ public class Messages {
 	public static final String MESSAGE_BAD_USER_HEADER = "Usuario invalido.";
 	
 	public static final String MESSAGE_LOGIN_FAILED = "No se logró iniciar sesión";
+	public static final String MESSAGE_PASSWORD_WRONG = "Credenciales incorrectas";
 	public static final String MESSAGE_REGISTER_FAILED = "Error al registrar";
 	public static final String MESSAGE_REFRESH_TOKEN_FAILED = "No se logro refrescar el token";
 }

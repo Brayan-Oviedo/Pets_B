@@ -40,12 +40,6 @@ public class UserEntity extends PersonEntity {
 		super();
 	}
 
-	@Autowired
-	public UserEntity(String userName, String password) {
-		super();
-		this.userName = userName;
-		this.password = password;
-	}
 	
 	@Autowired
 	public UserEntity(String userName, String password, String name, String lastName, int age) {
@@ -84,11 +78,5 @@ public class UserEntity extends PersonEntity {
 	public void setRols(Set<RolEntity> rols) {
 		this.rols = rols;
 	}
-
-	@Override
-	public String toString() {
-		return "UserEntity [userName=" + userName + ", password=" + password + ", rols=" + rols + "]";
-	}
-
 
 }

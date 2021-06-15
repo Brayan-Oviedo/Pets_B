@@ -12,9 +12,4 @@ public class AuthException extends Exception {
 		super(mssg);
 	}
 
-	public AuthException(String detail, String mssg) {
-		super(detail + ", " + mssg);
-	}
-
-
 }

@@ -2,6 +2,8 @@ package co.pets.auth.infrastructure.adapter.output.mapper.user;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.HashSet;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -20,6 +22,7 @@ public class UserMapperTest {
 		mapper = new UserMapper();
 		u = new User("Fan", "123", "Fan", "", 19);
 		uEntity = new UserEntity("Fan", "123", "Fan", "", 19);
+		uEntity.setRols(new HashSet<>());
 	}
 	
 	@Test
@@ -33,6 +36,6 @@ public class UserMapperTest {
 	public void toEntity() {
 		UserEntity userEntity = mapper.toEntity(u);
 		
-		assertEquals(uEntity.getUserName(), userEntity.getUserName());
+		assertEquals(uEntity.getRols().size(), userEntity.getRols().size());
 	}
 }

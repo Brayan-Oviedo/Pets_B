@@ -1,6 +1,7 @@
 package co.pets.auth.infrastructure.adapter.output.adapter.user;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -18,6 +19,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import co.pets.application.domain.exceptions.Messages;
+import co.pets.auth.application.domain.exception.UserException;
 import co.pets.auth.application.domain.user.User;
 import co.pets.auth.infrastructure.adapter.output.mapper.user.UserMapper;
 import co.pets.auth.infrastructure.adapter.output.model.user.UserEntity;
@@ -104,16 +106,12 @@ public class UserRepositoryImplTest {
 	
 	@Test
 	public void testSaveUserWithUserExisting() {
-		
-		Exception exception = null;
-
 		when(dataBase.existsByUserName(u.getUserName())).thenReturn(true);
 		
-		try {
-			repo.save(u);	
-		} catch (Exception e) {
-			exception = e;
-		}
+		
+		UserException exception = assertThrows(UserException.class, () -> {
+			repo.save(u);
+		});
 		
 		verify(dataBase).existsByUserName(u.getUserName());
 		assertEquals(Messages.MESSAGE_USER_EXISTING, exception.getMessage());
@@ -141,16 +139,11 @@ public class UserRepositoryImplTest {
 	
 	@Test
 	public void testUpdateUserWithUserNoExisting() {
-		
-		Exception exception = null;
-
 		when(dataBase.existsByUserName(u.getUserName())).thenReturn(false);
 		
-		try {
-			repo.update(u);	
-		} catch (Exception e) {
-			exception = e;
-		}
+		UserException exception = assertThrows(UserException.class, () -> {
+			repo.update(u);
+		});
 		
 		verify(dataBase).existsByUserName(u.getUserName());
 		assertEquals(Messages.MESSAGE_USER_NO_EXISTING, exception.getMessage());

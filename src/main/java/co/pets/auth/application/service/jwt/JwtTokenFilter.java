@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+
 public class JwtTokenFilter extends OncePerRequestFilter{
 
 	@Autowired
@@ -36,7 +37,7 @@ public class JwtTokenFilter extends OncePerRequestFilter{
 				SecurityContextHolder.getContext().setAuthentication(auth);
 			}
 		} catch (Exception e) {
-		
+			
 		}
 		
 		

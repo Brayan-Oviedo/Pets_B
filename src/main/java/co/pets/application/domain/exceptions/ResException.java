@@ -6,6 +6,10 @@ public class ResException {
 	private String mssg;
 	private Exception exception;
 	
+	public ResException() {
+		
+	}
+	
 	public ResException(String mssg, Exception exception) {
 		this.setMssg(mssg);
 		this.setException(exception);
