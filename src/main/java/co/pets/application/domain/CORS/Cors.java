@@ -1,4 +1,4 @@
-package co.pets.core;
+package co.pets.application.domain.CORS;
 
 import java.io.IOException;
 import javax.servlet.Filter;
