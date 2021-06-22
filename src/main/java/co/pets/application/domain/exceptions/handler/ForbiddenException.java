@@ -1,4 +1,4 @@
-package co.pets.application.domain.exceptions.config;
+package co.pets.application.domain.exceptions.handler;
 
 public class ForbiddenException extends RuntimeException{
 

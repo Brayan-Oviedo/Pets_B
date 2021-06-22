@@ -1,5 +1,6 @@
 package co.pets.application.domain.exceptions;
 
+import co.pets.application.domain.exceptions.handler.BadRequestException;
 
 public class ResException {
 	
@@ -31,6 +32,10 @@ public class ResException {
 		this.exception = exception;
 	}
 
-	
+	public static ResException getBadException(String mssg) {
+		BadRequestException exception = new BadRequestException(mssg);
+		ResException res = new ResException(mssg, exception);
+		return res;
+	}
 	
 }

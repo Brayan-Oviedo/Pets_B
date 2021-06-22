@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.pets.application.domain.exceptions.ResException;
-import co.pets.application.domain.exceptions.config.BadRequestException;
 import co.pets.auth.application.domain.jwt.JwtDto;
 import co.pets.auth.application.domain.user.BUser;
 import co.pets.auth.application.domain.user.NewUser;
@@ -35,12 +34,8 @@ public class AuthController {
 			authService.register(newUser);
 			return new ResponseEntity<>(HttpStatus.OK);
 		
-		} catch (Exception e) {
-			
-			BadRequestException exception = new BadRequestException(e.getMessage());
-			ResException res = new ResException(e.getMessage(), exception);
-				
-			return new ResponseEntity<ResException>(res, HttpStatus.BAD_REQUEST);
+		} catch (Exception e) {				
+			return new ResponseEntity<ResException>(ResException.getBadException(e.getMessage()), HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -51,11 +46,7 @@ public class AuthController {
 			return new ResponseEntity<>(authService.login(loginUser), HttpStatus.OK);
 		
 		} catch (Exception e) {
-			
-			BadRequestException exception = new BadRequestException(e.getMessage());
-			ResException res = new ResException(e.getMessage(), exception);
-				
-			return new ResponseEntity<ResException>(res, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<ResException>(ResException.getBadException(e.getMessage()), HttpStatus.BAD_REQUEST);
 		}	
 	}
 	
@@ -67,10 +58,7 @@ public class AuthController {
 		
 		} catch (Exception e) {
 			
-			BadRequestException exception = new BadRequestException(e.getMessage());
-			ResException res = new ResException(e.getMessage(), exception);
-				
-			return new ResponseEntity<ResException>(res, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<ResException>(ResException.getBadException(e.getMessage()), HttpStatus.BAD_REQUEST);
 		}
 	}
 }
